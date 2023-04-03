@@ -3,7 +3,8 @@ redis:
 
 db:
   image: postgres:9.4
-
+    environment:
+     POSTGRES_PASSWORD: 1234
 vote:
   image: dockersamples/examplevotingapp_vote
   ports:
