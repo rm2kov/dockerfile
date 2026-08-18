@@ -3,7 +3,7 @@ services:
     image: redis
 
   db:
-    image: postgres:9.4
+    image: postgres:13
     environment:
      POSTGRES_PASSWORD: 1234
   vote:

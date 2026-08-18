@@ -21,3 +21,7 @@ docker compose up -d
 
 ## Источник
 Пример на основе [dockersamples/example-voting-app](https://github.com/dockersamples/example-voting-app)
+## Known issues
+На Windows + WSL2 (Docker Desktop) сервисы `db`/`worker`/`vote` падают с `exec format error` —
+похоже на проблему архитектуры/эмуляции конкретно в этом окружении, а не в самом compose-файле
+(конфиг проходит `docker compose config` без ошибок). Не воспроизводилось на Linux-хосте.
