@@ -25,3 +25,12 @@ docker compose up -d
 На Windows + WSL2 (Docker Desktop) сервисы `db`/`worker`/`vote` падают с `exec format error` —
 похоже на проблему архитектуры/эмуляции конкретно в этом окружении, а не в самом compose-файле
 (конфиг проходит `docker compose config` без ошибок). Не воспроизводилось на Linux-хосте.
+
+
+## CI/CD
+Добавлен пайплайн `.github/workflows/validate.yml` — запускается на каждый push,
+проверяет `docker compose config` (ловит синтаксические ошибки в compose-файле).
+
+Проверено на реальной ошибке: сломал `services:` → `servicess:`, запушил —
+пайплайн упал за 6 секунд с ошибкой "additional properties 'servicess' not allowed".
+Значит проверка реально работает, а не просто формальность.
