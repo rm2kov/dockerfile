@@ -34,3 +34,11 @@ docker compose up -d
 Проверено на реальной ошибке: сломал `services:` → `servicess:`, запушил —
 пайплайн упал за 6 секунд с ошибкой "additional properties 'servicess' not allowed".
 Значит проверка реально работает, а не просто формальность.
+
+## CD: автодеплой по SSH через GitHub Actions
+Job `deploy` (needs: validate) — appleboy/scp-action копирует docker-compose.yml на сервер,
+appleboy/ssh-action выполняет docker-compose pull/down/up -d удалённо.
+Secrets: SERVER_HOST, SERVER_USER, SERVER_SSH_KEY (отдельный deploy-ключ, не личный).
+Баг: docker-compose v1 падает с KeyError 'ContainerConfig' при recreate — обошли через down+up
+вместо прямого up (жертвуя простоем ради надёжности на этой версии).
+Понял: needs: связывает job'ы в цепочку — деплой не пойдёт, если проверка не прошла.
