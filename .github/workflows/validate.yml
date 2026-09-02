@@ -33,4 +33,5 @@ jobs:
           script: |
             cd /home/rm2kov
             docker-compose pull
+            docker-compose down
             docker-compose up -d
